@@ -20,7 +20,7 @@ body[data-startup="selection"]{overflow:hidden}
 .startup-brand p{font-size:16px;letter-spacing:-.02em;margin:12px 0 0!important;color:#416485}
 .startup-brand small{font-size:12px;color:#71879d}
 .startup-track{height:2px;width:168px;background:#dce9f5;margin:32px 0 16px;overflow:hidden}
-.startup-track i{height:100%;display:block;background:var(--wayfinding-blue);transform-origin:left;animation:link-loading 1.35s cubic-bezier(.23,1,.32,1) both}
+.startup-track i{height:100%;display:block;background:var(--wayfinding-blue);transform-origin:left;animation:link-loading 2.35s cubic-bezier(.23,1,.32,1) both}
 @keyframes link-loading{from{transform:scaleX(.04)}to{transform:scaleX(1)}}
 @keyframes link-arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .workspace-entry{margin:0;padding:0;border:0;width:100vw;max-width:none;height:100dvh;max-height:none;background:#fff;color:var(--clinical-ink);overflow:auto;overscroll-behavior:contain}
