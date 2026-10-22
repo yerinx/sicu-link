@@ -1,0 +1,10 @@
+.main-forecast-chip rect{fill:#fff;fill-opacity:.96;stroke:#dce5ed;stroke-width:.025}
+.main-forecast-label{font-family:inherit;font-size:.30px;font-weight:500;fill:#688196;dominant-baseline:middle}
+.main-forecast-value{font-family:inherit;font-size:.40px;font-weight:700;font-variant-numeric:tabular-nums;dominant-baseline:middle;letter-spacing:-.015px}
+.main-forecast-death .main-forecast-value{fill:#ac4a65}
+.main-forecast-transfer .main-forecast-value{fill:#267b97}
+.main-forecast-bed[data-forecast-state]:not([data-forecast-state=current]) .main-forecast-value{fill:#8b9eaf}
+.main-forecast-legend{margin:6px 10px 8px!important;max-width:100%;font-size:10px!important;line-height:1.6;color:#7b8fa1;letter-spacing:-.01em}
+.main-forecast-legend[hidden]{display:none}
+body[data-admission-map-active=true] .main-forecast-badges,body[data-admission-map-active=true] .main-forecast-legend{display:none}
+@media(prefers-contrast:more){.main-forecast-label,.main-forecast-legend{fill:#36546b;color:#36546b}.main-forecast-chip rect{stroke:#96abbc}}

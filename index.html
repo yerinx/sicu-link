@@ -1,23 +1,9 @@
 <!doctype html>
 <html lang="en" data-theme="light">
-<head><!-- ICU_SHARED_ENTRY_START --><script>/* The KHDP presentation entry uses the canonical published dashboard.
- * Private source-record/LLM tools remain behind KHDP authentication.
- * Only navigation preferences are carried across; never credentials or patient IDs.
- */
-(()=>{
- const targetOrigin='https://icu-ward-board-20261016.kanghoun.chatgpt.site';
- const here=new URL(location.href);
- if(here.hostname!=='s4w66hdi1zteriq8oyfb8wzm.khdp.net'||!/^\/proxy\/8006\/(?:index\.html)?$/.test(here.pathname))return;
- if(here.searchParams.get('view')==='private')return;
- const target=new URL('/',targetOrigin);
- const allowed={lang:/^(ko|en)$/,hospital:/^[ABC]$/,ward:/^[ABC]-(?:SICU|CSICU|NSICU|TSICU)$/,nurse:/^[ABC]-(?:SICU|CSICU|NSICU|TSICU)-(?:[1-4]|C)$/};
- for(const [key,pattern] of Object.entries(allowed)){const value=here.searchParams.get(key);if(value&&pattern.test(value))target.searchParams.set(key,value);}
- location.replace(target.href);
-})();
-</script><!-- ICU_SHARED_ENTRY_END -->
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Surgical ICU · Team Simulation</title>
+<title>SICU LINK · FINAL 2</title>
 <style>
 :root{
   --bg:#f6f7f9; --panel:#fff; --ink:#1b1f24; --muted:#6a7380; --line:#d9dde3;
@@ -145,7 +131,7 @@ main{grid-template-columns:minmax(0,1fr) 310px;padding:20px 24px;gap:20px;align-
 .icon-rules{font-size:11px;color:var(--muted)}.icon-rules p{max-width:700px}.research-notes{margin:16px 24px;padding:10px 16px;border:1px solid var(--line);border-radius:10px;background:white}.scenario-description summary{font-size:11px;padding:2px 0}.scenario-card{padding:10px 16px;margin:10px 24px}.hospital-card{padding:13px}.hospital-card.selected{padding:12px}.hospital-numbers{margin:9px 0}.hospital-numbers strong{font-size:28px}.network-panel{padding:18px 24px}.finding-chip:not(.active){color:#68788a;background:#f7f9fc}.patient-card{color:#172840}.hospital-actions button:disabled{opacity:.55}.hospital-actions button{color:#203d5b}.device-chips{padding-top:7px;border-top:1px solid #edf1f5}.side .legend{color:#52647c}
 </style>
 <link rel="stylesheet" href="static/app-shell.css">
-<meta name="icu-release-at" content="2026-10-16T14:09:50.435507+00:00"><meta name="sicu-ui-updated-at" content="2026-10-16T20:17:10+00:00">
+<meta name="icu-release-at" content="2026-10-16T14:09:50.435507+00:00"><meta name="sicu-ui-updated-at" content="2026-10-17T13:41:13+09:00">
 <link rel="preload" href="assets/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="ui/hospital-base.css">
@@ -166,6 +152,11 @@ main{grid-template-columns:minmax(0,1fr) 310px;padding:20px 24px;gap:20px;align-
 <link rel="stylesheet" href="ui/ward-spaces.css">
 <link rel="stylesheet" href="ui/unified-replay.css">
 <link rel="stylesheet" href="ui/coordination-context.css">
+<link rel="stylesheet" href="ui/demo-patient-records.css"><link rel="stylesheet" href="ui/demo-monthly.css">
+<link rel="stylesheet" href="ui/bed-ops-sim.css">
+<link rel="stylesheet" href="ui/admission-map-bridge.css">
+<link rel="stylesheet" href="ui/admission-assistant.css">
+<link rel="stylesheet" href="ui/main-forecast-badges.css">
 </head>
 <body data-hospital-ui="v1" data-board-design="sicu-link" data-startup="loading"><div id="startupScreen" class="startup-screen" data-no-translate role="status" aria-live="polite">
   <div class="startup-brand"><img src="assets/identity/logo-mark.svg" alt="" width="72" height="72"><div class="startup-wordmark">SICU <span>LINK</span><small class="team-signature">TEAM 4</small></div><p data-copy="brandSubtitle">외과계 ICU 간호 상황판</p><div class="startup-track"><i></i></div><small data-copy="preparing">돌봄의 흐름을 준비하고 있습니다</small></div>
@@ -252,7 +243,7 @@ main{grid-template-columns:minmax(0,1fr) 310px;padding:20px 24px;gap:20px;align-
   </div>
 </main>
 <details class="research-notes"><summary>Data sources and language</summary><p class="shift-note" id="languageNote">New AI replies follow the selected language. Existing conversations, saved notes and source records remain in their original language.</p>
-<p class="shift-note">Research prototype · <a href="https://s4w66hdi1zteriq8oyfb8wzm.khdp.net/proxy/8005/" target="_blank" rel="noopener">Open actual K-MIMIC replay on KHDP</a> · <a href="https://www.nature.com/articles/s41467-025-64430-x" target="_blank" rel="noopener">AgentMD-inspired calculator workflow</a>. qSOFA is calculated from available observations; it does not establish an ICU emergency. The 0–100 workload index is a simulation heuristic, not a validated clinical score.</p>
+<p class="shift-note">Research prototype · <a href="https://www.nature.com/articles/s41467-025-64430-x" target="_blank" rel="noopener">AgentMD-inspired calculator workflow</a>. qSOFA is calculated from available observations; it does not establish an ICU emergency. The 0–100 workload index is a simulation heuristic, not a validated clinical score.</p>
 </details><section class="flow-panel"><details id="workbookPlan" open data-no-translate></details></section><section class="flow-panel"><details id="flowDetails" open><summary>30-day bed planning sandbox</summary><h2>30-day surgical ICU bed flow · 8 beds</h2><p id="flowNote" class="tag"></p><div class="legend"><span class="flow-key red">RED · Critical</span><span class="flow-key blue">BLUE · ICU monitoring</span><span class="flow-key green">GREEN · Ward transfer day</span><span class="flow-key yellow">YELLOW · Surgery reserved</span><span class="flow-key empty">GRAY · Available</span></div><p id="flowSummary"></p><div class="flow-scroll"><table id="flowTable" aria-label="Thirty-day eight-bed simulation"></table></div><p id="flowSelection" class="tag" role="status">Select a cell to inspect its fictional patient journey.</p></details></section>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="cTitle"><div class="mbox">
   <div class="modal-topbar"><div><span class="eyebrow">Patient conversation</span><h2 id="cTitle">Care team discussion</h2></div><button id="cContextToggle" aria-expanded="false">Patient summary</button><button id="cClose" class="close-button" aria-label="Close conversation"><span aria-hidden="true">✕</span> <span>Close</span><kbd>Esc</kbd></button></div>
@@ -937,5 +928,16 @@ e.innerHTML='<summary>'+(ko?'ICU.xlsx · 제공한 8병상 시나리오':'ICU.xl
 <script src="ui/ward-spaces.js"></script>
 <script src="ui/unified-replay.js"></script>
 <script src="ui/coordination-context.js"></script>
+<script src="ui/demo-monthly.js"></script>
+<script src="ui/demo-records-model.js"></script>
+<script src="ui/demo-patient-records.js"></script>
+<script src="ui/bed-ops-sim-model.js"></script>
+<script src="ui/admission-story-model.js"></script>
+<script src="ui/bed-ops-sim.js"></script>
+<script src="ui/admission-map-bridge.js"></script>
+<script src="ui/admission-assistant-model.js"></script>
+<script src="ui/admission-assistant.js"></script>
+<script src="ui/demo-forecast-model.js"></script>
+<script src="ui/main-forecast-badges.js"></script>
 </body>
 </html>

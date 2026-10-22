@@ -1,7 +1,18 @@
 # SICU LINK
 
 외과 ICU 병상 현황과 간호 업무를 살펴보는 공개 시연 사이트입니다.
-화면과 데이터는 기존 공개 시연 버전 그대로이며, 가상 시연 데이터로 동작합니다.
+가상 시연 데이터로 동작하며, SICU LINK · FINAL 공개본의 상세 기능을 포함합니다.
+
+## 포함된 화면
+
+- 환자 기록·활력 추이·검사 결과 검색·영상 이력·환자 기록 기반 상담과 SBAR
+- 월별 병상 재생, 입실 준비와 LINK 제안, 기존 지도에 연결된 운영 시연
+- 시연용 예측 배지와 입실 이야기·운영 검토 보조 화면
+
+AI 상담은 원본 공개 사이트와 동일하게 **미리 작성된 시연 응답**을 표시합니다.
+실제 LLM 호출은 별도 서버와 모델 설정이 필요하며, GitHub Pages에 API 키를 넣지 않습니다.
+영상 탭의 흉부 도식은 설명용 그림이며 실제 환자 X-ray가 아닙니다.
+처음 로딩 화면과 진행 막대는 요청에 따라 2.35초를 유지합니다.
 
 ## GitHub Pages 배포
 
@@ -22,10 +33,11 @@
 
 ## 출처
 
-- 기존 시연: https://sicu-care-board-v3-20261016.spicyroot128.chatgpt.site/
-- 공개 버전: 25
-- 원본 소스 커밋: `d4a36f1535bafdccb2297ca332a889e714c97dc3`
-- 화면 파일과 시연 데이터는 기존 배포 파일을 변경 없이 복사했습니다.
+- 상세 기능의 원본: https://sicu-link-final-20261017.spicyroot128.chatgpt.site/
+- 상세 기능의 공개 버전: 3
+- 상세 기능의 소스 커밋: `a34e47fabba5d1ee2c261fc9c6506e0953e22d2b`
+- 상세 공개본의 전체 화면·시연 모듈을 가져오고 기존 2.35초 로딩을 유지했습니다.
+- 정적 상태 경로 `api/demo/status`는 실제 LLM이 연결되지 않았음을 반환합니다.
 - `/api/state`는 브라우저 안의 스냅샷 어댑터가 제공하며, 실제 병원 서버나 모델 API를 호출하지 않습니다.
 
 GitHub Pages 공식 안내: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site

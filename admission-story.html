@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SICU LINK · 입실 준비 이야기</title>
+  <link rel="stylesheet" href="ui/bed-ops-sim.css">
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#f4f7fa;color:#294b65;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}.story-appbar{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 24px}.story-brand{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none}.story-brand img{width:38px;height:38px}.story-brand strong{display:block;letter-spacing:.015em;font-size:19px}.story-brand small{display:block;color:#72889b;font-size:11px;letter-spacing:.15em}.story-language{display:flex;gap:4px;padding:4px;border:1px solid #dee7ee;background:#fff;border-radius:9px}.story-language button{border:0;border-radius:6px;padding:7px 12px;background:transparent;color:#627b90;cursor:pointer;font:inherit;font-size:12px}.story-language button[aria-pressed=true]{background:#edf4f8;color:#2b5e7c}.story-language button:focus-visible{outline:3px solid #8ab4cb;outline-offset:2px}main{max-width:1200px;margin:0 auto;padding:0 24px 28px}.story-app-footer{max-width:1200px;margin:0 auto;padding:0 26px 20px;color:#7c8fa0;font-size:11px}body[data-admission-story=standalone] #bedOpsSimulation{margin:0}@media(max-width:650px){.story-appbar{padding:16px}.story-brand strong{font-size:16px}main{padding:0 12px 20px}.story-language button{padding:6px 9px}.story-app-footer{padding:0 16px 16px}}
+  </style>
+</head>
+<body data-admission-story="standalone">
+  <div class="story-appbar">
+    <a class="story-brand" href="index.html?lang=ko&amp;workspace=hospital&amp;hospital=A#ward"><img src="assets/identity/logo-mark.svg" alt=""><span><strong>SICU LINK</strong><small>TEAM 4 · ADMISSION JOURNEY</small></span></a>
+    <div class="story-language" role="group" aria-label="언어 / Language"><button type="button" data-story-language="ko" aria-pressed="true">한국어</button><button type="button" data-story-language="en" aria-pressed="false">English</button></div>
+  </div>
+  <main><div id="bedOpsSimulationAnchor"></div></main>
+  <div class="story-app-footer" id="storyAppFooter">가상 환자 · 규칙에 따른 에이전트 동작 시연 · 실제 LLM 호출 없음</div>
+  <script>
+    (()=>{function choose(lang){document.documentElement.lang=lang;document.querySelectorAll('[data-story-language]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.storyLanguage===lang)));document.getElementById('storyAppFooter').textContent=lang==='ko'?'가상 환자 · 규칙에 따른 에이전트 동작 시연 · 실제 LLM 호출 없음':'Fictional patients · rule-based agent workflow demonstration · no live LLM calls';document.dispatchEvent(new CustomEvent('icu-language'));}document.querySelectorAll('[data-story-language]').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.storyLanguage)));choose(new URLSearchParams(location.search).get('lang')==='en'?'en':'ko');})();
+  </script>
+  <script src="ui/bed-ops-sim-model.js"></script>
+  <script src="ui/admission-story-model.js"></script>
+  <script src="ui/bed-ops-sim.js"></script>
+</body>
+</html>

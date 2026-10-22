@@ -124,7 +124,9 @@
       }
       if (entry.tx) {
         entry.tx.classList.add('clinical-bed-status');
-        set(entry.tx,'data-map-color-only',/^(RED|BLUE|GREEN)$/.test(entry.tx.textContent.trim()));
+        // All bed states use color on the map; keep descriptive text in details.
+        set(entry.tx, 'data-map-color-only', true);
+        set(entry.tx, 'aria-hidden', true);
         set(entry.tx, 'x', Number(bed.x) - 1.425);
         set(entry.tx, 'y', Number(bed.y) + 1.45);
       }

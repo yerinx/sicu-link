@@ -25,5 +25,5 @@
 #floors .clinical-bed-patient{pointer-events:none}
 #floors .clinical-bed-patient .transport-patient-blanket{fill:#c5dcef;stroke:#6e94b6}
 
-#floors .clinical-bed-status[data-map-color-only=true]{display:none}
+#floors .clinical-bed-status{display:none}
 #floors .spatial-station-label{font-family:inherit;font-size:.42px;font-weight:550;fill:#476680;letter-spacing:normal}

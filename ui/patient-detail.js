@@ -81,6 +81,22 @@
       }
       body.append(vitals);
 
+      // The map and this summary share one authored operational-time forecast.
+      // It remains separate from the clinical record assessment-time selector.
+      const forecast = window.SICUMainForecasts?.currentForBed?.(bed);
+      if (forecast?.available && forecast.patientId === patient.pid &&
+          Number.isFinite(forecast.mortalityPercent) && Number.isFinite(forecast.transfer72hPercent)) {
+        const summary = element('section','patient-forecast');
+        summary.setAttribute('aria-label',t('병동 운영 시연 예측','Authored ward forecast'));
+        summary.dataset.patientId = forecast.patientId;
+        summary.dataset.forecastHour = String(forecast.assessment.hour);
+        summary.innerHTML = '<header><span>'+t('병동 운영 시연 예측','Authored ward forecast')+'</span><small>'+esc(forecast.assessment.stamp)+'</small></header>'+ 
+          '<div class="patient-forecast-metrics"><div><span>'+t('원내 사망 위험','In-hospital mortality')+'</span><strong>'+esc(forecast.mortalityPercent.toFixed(1))+'<small>%</small></strong></div>'+ 
+          '<div><span>'+t('72시간 내 생존 전과','Alive ward transfer within 72h')+'</span><strong>'+esc(forecast.transfer72hPercent.toFixed(1))+'<small>%</small></strong></div></div>'+ 
+          '<p>'+t('가상 예측 · 실제 모델 추론 아님','Authored forecasts · not model inference')+'</p>';
+        body.append(summary);
+      }
+
       const content = element('div','patient-sheet-body');
       const location = element('section','patient-location');
       if (anatomy) {

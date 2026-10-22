@@ -173,3 +173,18 @@ body[data-board-design][data-text-size=large] .patient-sheet :is(.anatomy-panel 
   body[data-board-design][data-text-size=large] .patient-sheet .anatomy-panel>div{flex-direction:column}
 }
 @media(prefers-reduced-motion:reduce){.patient-device-details>summary>svg{transition:none}}
+
+/* Same authored forecast as the small badges beside this patient's bed number. */
+#publicPatientBody .patient-forecast{margin:4px 0 18px;padding:17px 20px;border:1px solid #e7edf2;border-radius:15px;background:#fbfcfd}
+#publicPatientBody .patient-forecast>header{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#6f8798;font-size:11px}
+#publicPatientBody .patient-forecast>header>span{font-weight:650}
+#publicPatientBody .patient-forecast>header>small{font-size:10px;color:#91a2af;font-variant-numeric:tabular-nums}
+#publicPatientBody .patient-forecast-metrics{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:13px}
+#publicPatientBody .patient-forecast-metrics>div{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#publicPatientBody .patient-forecast-metrics>div+div{border-left:1px solid #e8eef3;padding-left:22px}
+#publicPatientBody .patient-forecast-metrics>div>span{font-size:11px;color:#7b90a0;line-height:1.5}
+#publicPatientBody .patient-forecast-metrics strong{font-size:27px;line-height:1.2;font-weight:700;letter-spacing:-.04em;color:#a46376;font-variant-numeric:tabular-nums;white-space:nowrap}
+#publicPatientBody .patient-forecast-metrics>div+div strong{color:#397d8e}
+#publicPatientBody .patient-forecast-metrics strong small{font-size:13px;font-weight:550;margin-left:3px}
+#publicPatientBody .patient-forecast>p{margin:10px 0 0;font-size:9px;color:#a0aeba}
+@media(max-width:600px){#publicPatientBody .patient-forecast{padding:15px}#publicPatientBody .patient-forecast-metrics{gap:12px}#publicPatientBody .patient-forecast-metrics>div{display:block}#publicPatientBody .patient-forecast-metrics>div+div{padding-left:12px}#publicPatientBody .patient-forecast-metrics strong{display:block;margin-top:6px;font-size:25px}}

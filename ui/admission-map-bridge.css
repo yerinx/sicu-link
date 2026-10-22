@@ -1,0 +1,68 @@
+/* The admission exercise uses the main illustration; all overrides disappear on exit. */
+body[data-admission-map-active="true"] #demoMonthWard,
+body[data-admission-map-active="true"] #bedCounts{display:none!important}
+#floors .admission-map-scene .bed-care-icons,
+#floors .admission-map-scene .clinical-bed-patient,
+#floors .admission-map-scene .ward-space-links .link{visibility:hidden!important}
+#floors .admission-map-scene .bed[data-admission-status]{stroke:#b9cad9!important;stroke-width:.055!important;opacity:1!important;fill-opacity:.25!important;filter:none!important}
+#floors .admission-map-scene .bed[data-admission-status="occupied"]{fill:#4384c2!important}
+#floors .admission-map-scene .bed[data-admission-status="cleaning"]{fill:#e1b84f!important;stroke:#d1b96c!important}
+#floors .admission-map-scene .bed[data-admission-status="reserved"]{fill:#e1b84f!important;stroke:#d1b96c!important}
+#floors .admission-map-scene .bed[data-admission-status="available"]{fill:#438b73!important;stroke:#8eafa0!important}
+#floors .admission-map-banner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 14px;margin:0 0 8px;border:1px solid #c8dfe8;border-radius:12px;background:#eff7fa;color:#355f73;font-size:13px;line-height:1.5}
+#floors .admission-map-banner strong{font-size:12px;background:#fff;border-radius:6px;padding:3px 8px;color:#2f7084}
+#floors .admission-map-banner small{margin-left:auto;color:#718998;font-size:11px}
+#floors .admission-map-banner small.admission-map-legend{flex-basis:100%;margin-left:0;font-size:10px;line-height:1.3;color:#8497a5}
+#floors .admission-map-overlay{pointer-events:none}
+#floors .admission-map-guide{transition:transform .85s ease;pointer-events:none}
+#floors .admission-map-guide[data-ready="false"]{transition:none}
+#floors .admission-map-agent{pointer-events:none}
+#floors .admission-agent-background{fill:#fff;stroke:#a6cad5;stroke-width:.035;filter:drop-shadow(0 .025px .045px #3c6a7a15)}
+#floors .admission-agent-drawing{fill:none;stroke:#3b8094;stroke-width:.055;stroke-linecap:round;stroke-linejoin:round}
+#floors .admission-map-target path{fill:none;stroke:#4b8d9d;stroke-width:.075;stroke-linecap:round;stroke-linejoin:round}
+#floors .admission-map-callout{font-size:.34px;font-family:inherit;font-weight:650;fill:#3c778a;paint-order:stroke;stroke:#fff;stroke-width:.12;stroke-linejoin:round}
+#floors .admission-sim-patient .transport-patient-blanket{fill:#c5dcef;stroke:#6e94b6}
+#floors .admission-sim-care{pointer-events:none;opacity:.85}
+#floors .admission-map-row .ward-space-map{outline:1px solid #cfe2e9;outline-offset:2px;border-radius:10px}
+@media(prefers-reduced-motion:reduce){#floors .admission-map-guide{transition:none}}
+@media(max-width:700px){#floors .admission-map-banner{gap:6px 10px;font-size:12px}#floors .admission-map-banner small{margin-left:0;width:100%}}
+
+#floors .admission-map-forecast{pointer-events:none}
+#floors .admission-forecast-surface{fill:#ffffff;fill-opacity:.94;stroke:#dbe7ef;stroke-width:.025}
+#floors .admission-mortality-surface{fill:#fdf7f8;stroke:#eadce0}
+#floors .admission-transfer-surface{fill:#f3f9fa;stroke:#d7e8eb}
+#floors .admission-prediction-label{font-family:inherit;font-size:.30px;font-weight:500;fill:#6d8294;letter-spacing:normal}
+#floors .admission-prediction-value{font-family:inherit;font-size:.46px;font-weight:650;font-variant-numeric:tabular-nums;letter-spacing:-.012px}
+#floors .admission-mortality-value{fill:#9a596b}
+#floors .admission-transfer-value{fill:#367a8b}
+#floors .admission-map-forecast:not([data-forecast-state="current"]) .admission-prediction-value{fill:#a2b2bf}
+#floors .admission-map-forecast:not([data-forecast-state="current"]) .admission-forecast-surface{fill-opacity:.4;stroke-opacity:.5}
+
+#floors .admission-map-proposal{pointer-events:none;filter:drop-shadow(0 .06px .09px #2f697e20)}
+#floors .admission-proposal-surface{fill:#e4f3f4;stroke:#90bbc5;stroke-width:.045}
+#floors .admission-proposal-tail{fill:#e4f3f4;stroke:#90bbc5;stroke-width:.04;stroke-linejoin:round}
+#floors .admission-proposal-heading{font-family:inherit;font-size:.30px;font-weight:750;fill:#397f8d;letter-spacing:.025px}
+#floors .admission-proposal-action{font-family:inherit;font-size:.425px;font-weight:650;fill:#245967;letter-spacing:-.008px}
+#floors .admission-map-proposal[data-tone="report"] .admission-proposal-surface,
+#floors .admission-map-proposal[data-tone="report"] .admission-proposal-tail,
+#floors .admission-map-proposal[data-tone="progress"] .admission-proposal-surface,
+#floors .admission-map-proposal[data-tone="progress"] .admission-proposal-tail{fill:#edf3f8;stroke:#a7bfce}
+#floors .admission-map-proposal[data-tone="report"] .admission-proposal-heading,
+#floors .admission-map-proposal[data-tone="progress"] .admission-proposal-heading{fill:#607f94}
+#floors .admission-map-proposal[data-tone="report"] .admission-proposal-action,
+#floors .admission-map-proposal[data-tone="progress"] .admission-proposal-action{fill:#3e6278}
+#floors .admission-map-proposal[data-tone="approval"] .admission-proposal-surface,
+#floors .admission-map-proposal[data-tone="approval"] .admission-proposal-tail,
+#floors .admission-map-proposal[data-tone="hold"] .admission-proposal-surface,
+#floors .admission-map-proposal[data-tone="hold"] .admission-proposal-tail{fill:#fff2dd;stroke:#cfaf73}
+#floors .admission-map-proposal[data-tone="approval"] .admission-proposal-heading,
+#floors .admission-map-proposal[data-tone="hold"] .admission-proposal-heading{fill:#967133}
+#floors .admission-map-proposal[data-tone="approval"] .admission-proposal-action,
+#floors .admission-map-proposal[data-tone="hold"] .admission-proposal-action{fill:#795924}
+#floors .admission-map-proposal[data-tone="complete"] .admission-proposal-surface,
+#floors .admission-map-proposal[data-tone="complete"] .admission-proposal-tail{fill:#e9f5ef;stroke:#9fc3ae}
+#floors .admission-map-proposal[data-tone="complete"] .admission-proposal-heading{fill:#5b8d75}
+#floors .admission-map-proposal[data-tone="complete"] .admission-proposal-action{fill:#3e765d}
+#floors .admission-map-proposal.is-new{animation:admission-proposal-arrive .65s ease-out 1 both}
+@keyframes admission-proposal-arrive{from{opacity:.66;filter:drop-shadow(0 0 .24px #438a9a88)}to{opacity:1;filter:drop-shadow(0 .06px .09px #2f697e20)}}
+@media(prefers-reduced-motion:reduce){#floors .admission-map-proposal.is-new{animation:none}}

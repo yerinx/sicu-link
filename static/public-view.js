@@ -5,6 +5,7 @@
  const snapshot=originalFetch('snapshot.json').then(r=>{if(!r.ok)throw new Error('Snapshot unavailable');return r.json();}).then(s=>{current=s;return s;});
  window.fetch=async(input,options={})=>{
   const url=new URL(typeof input==='string'?input:input.url,location.href);
+  if(url.pathname.includes('/api/demo/'))return originalFetch(input,options);
   if(url.pathname.includes('/api/')){
    if(url.pathname.endsWith('/api/state'))return new Response(JSON.stringify(current||await snapshot),{headers:{'Content-Type':'application/json'}});
    return new Response(JSON.stringify({error:'Public preview is read-only. Live AI and simulation controls require the KHDP server version.'}),{status:403,headers:{'Content-Type':'application/json'}});

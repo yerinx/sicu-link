@@ -1,0 +1,63 @@
+#floors .admission-map-guide,#floors .admission-map-guide *{pointer-events:all;cursor:pointer}
+#floors .admission-map-guide:hover .admission-proposal-surface,#floors .admission-map-guide:focus-visible .admission-proposal-surface{stroke:#367d91;stroke-width:.075;filter:drop-shadow(0 .035px .07px #2b71852a)}
+#floors .admission-map-guide:focus-visible{outline:none}
+#floors .admission-map-guide:focus-visible .admission-agent-background{stroke:#367d91;stroke-width:.085}
+#admissionAssistantDialog{
+  position:fixed;inset:auto 24px 24px auto;margin:0;width:min(440px,calc(100vw - 36px));max-width:none;max-height:calc(100dvh - 48px);
+  padding:0;border:1px solid #d9e7ed;border-radius:22px;background:#fff;color:#274b62;box-shadow:0 24px 80px #173f5d30;font-family:inherit;overflow:hidden;
+}
+#admissionAssistantDialog[open]{display:flex;flex-direction:column;animation:assistant-appear .18s ease-out}
+#admissionAssistantDialog::backdrop{background:#15354d20;backdrop-filter:blur(2px)}
+#admissionAssistantDialog *{box-sizing:border-box}
+#admissionAssistantDialog header{display:flex;align-items:center;gap:11px;padding:18px 20px;border:0;background:#fff;position:static;box-shadow:none;flex-shrink:0}
+#admissionAssistantDialog .assistant-avatar{display:grid;place-items:center;width:43px;height:43px;flex:none;border-radius:14px;background:#eaf5f7;color:#2f8190;font-size:10px;font-weight:800;letter-spacing:.06em}
+#admissionAssistantDialog .assistant-kicker{display:block;font-size:11px;font-weight:600;color:#67919d;line-height:1.4}
+#admissionAssistantDialog h2{margin:4px 0 0;font-size:20px;font-weight:750;line-height:1.3;letter-spacing:-.03em;color:#274b62}
+#admissionAssistantDialog button{font:inherit;cursor:pointer}
+#admissionAssistantDialog header>button{margin-left:auto;display:grid;place-items:center;flex:none;width:30px;height:30px;padding:0;border:0;border-radius:50%;background:#f3f6f8;color:#839ba8;font-size:23px;font-weight:400}
+#admissionAssistantDialog button:focus-visible{outline:3px solid #8abac9;outline-offset:3px}
+#admissionAssistantDialog .assistant-tabs{display:flex;gap:5px;padding:0 20px 12px;flex-shrink:0}
+#admissionAssistantDialog .assistant-tabs button{flex:1;min-height:36px;padding:8px;border:0;border-radius:9px;background:#f4f7f9;color:#8297a6;font-size:12px;font-weight:650}
+#admissionAssistantDialog .assistant-tabs button[aria-selected=true]{background:#e6f2f5;color:#2d7488}
+#admissionAssistantDialog .assistant-tabs button span{padding:1px 5px;margin-left:3px;border-radius:8px;background:#fff;font-size:10px}
+#admissionAssistantDialog #assistant-tab-content{overflow:auto;padding:4px 20px 18px;min-height:130px;max-height:50vh;overscroll-behavior:contain}
+#admissionAssistantDialog .assistant-record{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #edf2f5}
+#admissionAssistantDialog .assistant-record:last-child{border-bottom:0}
+#admissionAssistantDialog .assistant-record-time{flex:none;align-self:flex-start;padding:4px 6px;border-radius:6px;background:#edf4f7;color:#548294;font-size:11px;font-weight:700;font-variant-numeric:tabular-nums}
+#admissionAssistantDialog .assistant-record strong{font-size:15px;color:#375d71;line-height:1.4}
+#admissionAssistantDialog .assistant-record p{font-size:13px;line-height:1.7;color:#698697;margin:6px 0}
+#admissionAssistantDialog .assistant-record small{font-size:10px;color:#9aabb6}
+#admissionAssistantDialog .assistant-empty{padding:22px 0;color:#7992a1}
+#admissionAssistantDialog .assistant-empty strong{font-size:14px;font-weight:650}
+#admissionAssistantDialog .assistant-empty p{font-size:12px;line-height:1.7;margin:7px 0 0;color:#8ba0ad}
+#admissionAssistantDialog .assistant-readiness-stamp{font-size:11px;color:#8a9eab;display:flex;justify-content:space-between;gap:8px;margin:6px 0 11px}
+#admissionAssistantDialog .assistant-readiness-stamp strong{font-size:11px;font-weight:550;color:#5b9785;text-align:right}
+#admissionAssistantDialog .assistant-readiness-stamp.is-stale{flex-direction:column;padding:10px 12px;border-radius:9px;background:#fff7e9;color:#a78749;gap:3px}
+#admissionAssistantDialog .assistant-readiness-stamp.is-stale strong{color:#a1803f;text-align:left}
+#admissionAssistantDialog .assistant-changes{padding:10px 11px;margin-bottom:10px;border:1px solid #cee7db;border-radius:10px;background:#f1f8f4}
+#admissionAssistantDialog .assistant-changes>div{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:#59907b}
+#admissionAssistantDialog .assistant-changes b{margin:0 5px;color:#81a994}
+#admissionAssistantDialog .assistant-conditions{display:grid;gap:5px}
+#admissionAssistantDialog .assistant-condition{display:flex;align-items:center;gap:9px;min-height:47px;padding:7px 10px;border-radius:9px;background:#f7f9fb}
+#admissionAssistantDialog .assistant-condition-icon{display:grid;place-items:center;width:23px;height:23px;border-radius:50%;font-size:12px;background:#e8f3ee;color:#5c9b85;flex:none}
+#admissionAssistantDialog .assistant-condition>div{min-width:0}
+#admissionAssistantDialog .assistant-condition strong{display:block;font-size:12px;font-weight:650;color:#537387}
+#admissionAssistantDialog .assistant-condition small{display:block;font-size:10px;color:#99aab4;margin-top:2px}
+#admissionAssistantDialog .assistant-condition>span:last-child{margin-left:auto;font-size:10px;color:#5f9a85;white-space:nowrap}
+#admissionAssistantDialog .assistant-condition.is-pending{background:#fff8ed}
+#admissionAssistantDialog .assistant-condition.is-pending .assistant-condition-icon{background:#f6e9c9;color:#ac8a41}
+#admissionAssistantDialog .assistant-condition.is-pending>span:last-child{color:#ac8a41}
+#admissionAssistantDialog .assistant-condition.is-stale .assistant-condition-icon{background:#edf1f4;color:#9aadb8}
+#admissionAssistantDialog .assistant-condition.is-stale>span:last-child{color:#95a8b3}
+#admissionAssistantDialog .assistant-evidence{font-size:9px;color:#a8b6bf;margin:11px 1px 0}
+#admissionAssistantDialog footer{padding:16px 20px 18px;background:linear-gradient(135deg,#f0f7f9,#f9fbfc);border-top:1px solid #e3edf2;flex-shrink:0;position:static}
+#admissionAssistantDialog footer>small{font-size:10px;font-weight:650;color:#608b9b}
+#admissionAssistantDialog footer>p{margin:6px 0 12px;font-size:15px;font-weight:700;line-height:1.55;letter-spacing:-.025em;color:#315f75}
+#admissionAssistantDialog .assistant-continue{width:100%;border:0;border-radius:11px;padding:12px 14px;background:#28657f;color:#fff;font-size:13px;font-weight:650}
+#admissionAssistantDialog .assistant-continue:hover{background:#20556d}
+#admissionAssistantDialog .assistant-continue.is-approval{background:#977a3c}
+#admissionAssistantDialog .assistant-note{display:block;text-align:center;font-size:9px;color:#9badb7;margin-top:10px;line-height:1.5}
+#admissionAssistantDialog .assistant-done{display:block;padding:10px;border-radius:10px;background:#e7f2ec;color:#578c75;text-align:center;font-size:13px;font-weight:650}
+@keyframes assistant-appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){#admissionAssistantDialog{inset:auto 12px 12px 12px;width:auto;max-height:calc(100dvh - 24px);border-radius:18px}#admissionAssistantDialog #assistant-tab-content{max-height:42vh}}
+@media(prefers-reduced-motion:reduce){#admissionAssistantDialog[open]{animation:none}#admissionAssistantDialog::backdrop{backdrop-filter:none}}

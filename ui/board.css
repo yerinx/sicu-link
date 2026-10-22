@@ -114,11 +114,11 @@ body[data-board-design] .ward-map-viewport{overflow:auto;overscroll-behavior-x:c
 #floors svg{font-family:Pretendard,sans-serif;letter-spacing:normal}
 #floors svg .unit-r{fill:#f8fafc;stroke:#c7d4e1;stroke-width:.08}
 #floors svg .unit-t{fill:#254b70;font-size:1.05px;font-weight:600}
-#floors svg .bed{stroke-width:.07;fill-opacity:.13}
-#floors svg .bed.focus{stroke-width:.18;stroke:var(--high)}
+#floors svg .bed{stroke-width:.07;fill-opacity:.25}
+#floors svg .bed.focus{stroke-width:.10;stroke:var(--high)}
 #floors svg .bed-t{fill:var(--clinical-ink)!important;font-weight:600;font-size:.53px}
 #floors svg .bed-id{fill:var(--clinical-ink);font-size:.74px;font-weight:650}
-#floors svg g[role=button]:hover>.bed{stroke-width:.17;stroke:var(--wayfinding-blue);fill-opacity:.24}
+#floors svg g[role=button]:hover>.bed{stroke-width:.09;stroke:var(--wayfinding-blue);fill-opacity:.33}
 #floors svg g[role=button]{cursor:pointer}
 #floors .bed-care-icons{pointer-events:none}
 /* Staff keep their original nodes, role, state fill and care-history outline.
