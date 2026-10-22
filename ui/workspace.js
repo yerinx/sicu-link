@@ -219,7 +219,7 @@
     updateLanguage();setView('ward',false);sync();
     document.addEventListener('icu-language',()=>queueMicrotask(updateLanguage));
     const elapsed=performance.now();
-    setTimeout(()=>openEntry(false),Math.max(0,1350-elapsed));
+    setTimeout(()=>openEntry(false),Math.max(0,2350-elapsed));
   }
   const nativeDraw=window.draw;
   window.draw=function(){const result=nativeDraw.apply(this,arguments);sync();return result;};
