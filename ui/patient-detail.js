@@ -85,15 +85,15 @@
       // It remains separate from the clinical record assessment-time selector.
       const forecast = window.SICUMainForecasts?.currentForBed?.(bed);
       if (forecast?.available && forecast.patientId === patient.pid &&
-          Number.isFinite(forecast.mortalityPercent) && Number.isFinite(forecast.transfer72hPercent)) {
+          Number.isFinite(forecast.mortalityPercent) && Number.isFinite(forecast.wardTransferRemainingDays)) {
         const summary = element('section','patient-forecast');
         summary.setAttribute('aria-label',t('병동 운영 시연 예측','Authored ward forecast'));
         summary.dataset.patientId = forecast.patientId;
         summary.dataset.forecastHour = String(forecast.assessment.hour);
         summary.innerHTML = '<header><span>'+t('병동 운영 시연 예측','Authored ward forecast')+'</span><small>'+esc(forecast.assessment.stamp)+'</small></header>'+ 
           '<div class="patient-forecast-metrics"><div><span>'+t('원내 사망 위험','In-hospital mortality')+'</span><strong>'+esc(forecast.mortalityPercent.toFixed(1))+'<small>%</small></strong></div>'+ 
-          '<div><span>'+t('72시간 내 생존 전과','Alive ward transfer within 72h')+'</span><strong>'+esc(forecast.transfer72hPercent.toFixed(1))+'<small>%</small></strong></div></div>'+ 
-          '<p>'+t('가상 예측 · 실제 모델 추론 아님','Authored forecasts · not model inference')+'</p>';
+          '<div><span>'+t('ICU 퇴실까지 남은 시간','Time remaining to ICU exit')+'</span><strong>'+esc(forecast.wardTransferRemainingDays.toFixed(1))+'<small>'+t('일','days')+'</small></strong></div></div>'+
+          '<p>'+t('퇴실: 생존하여 일반병동으로 전실할 때까지의 잔여 일수 · 가상 시연 예시','Exit: remaining days to alive ICU-to-ward transfer · fictional demo examples')+'</p>';
         body.append(summary);
       }
 

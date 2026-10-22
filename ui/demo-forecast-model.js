@@ -1,19 +1,19 @@
-/* Authored presentation percentages, separate from every clinical/risk field.
+/* Authored mortality percentages and remaining-day examples, separate from every clinical/risk field.
  * Each array explicitly supplies hours 00–23. These are fictional daily display
  * schedules, never model inference, interpolation or a clinical risk calculator.
  */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;if(root)root.SICUDemoForecastModel=api;})(typeof window!=='undefined'?window:null,function(){
   'use strict';
   const profiles=[
-    {id:'steady-recovery',death:[6.8,6.6,6.5,6.4,6.2,6.1,6.0,5.8,5.6,5.4,5.2,5.0,4.9,4.8,4.6,4.5,4.3,4.2,4.0,3.9,3.8,3.6,3.5,3.4],transfer:[28,29,30,31,33,34,36,38,40,43,45,47,49,51,54,56,59,61,64,66,68,70,72,74]},
-    {id:'additional-review',death:[11.0,11.2,11.4,11.7,12.0,12.2,12.5,12.9,13.2,13.6,14.0,14.4,14.8,15.0,14.7,14.2,13.8,13.4,13.0,12.6,12.2,11.9,11.5,11.2],transfer:[18,18,17,17,16,16,15,15,14,14,13,13,12,12,13,14,15,16,17,18,19,20,21,22]},
-    {id:'transfer-discussion',death:[4.8,4.7,4.6,4.5,4.3,4.2,4.1,4.0,3.8,3.7,3.6,3.5,3.4,3.3,3.1,3.0,2.9,2.8,2.7,2.6,2.5,2.4,2.3,2.2],transfer:[52,53,54,55,56,57,58,60,62,64,66,68,70,72,74,75,76,77,78,79,80,81,82,83]},
-    {id:'extended-monitoring',death:[17.1,17.3,17.5,17.7,18.0,18.2,18.4,18.7,18.9,19.1,19.3,19.5,19.6,19.4,19.2,18.9,18.6,18.3,18.0,17.7,17.4,17.1,16.8,16.5],transfer:[9,9,8,8,7,7,6,6,5,5,4,4,4,5,6,7,8,9,10,11,12,13,14,15]},
-    {id:'gradual-progress',death:[9.8,9.6,9.5,9.3,9.1,8.9,8.7,8.5,8.4,8.2,8.0,7.8,7.6,7.5,7.3,7.1,6.9,6.7,6.5,6.3,6.1,5.9,5.7,5.5],transfer:[34,35,36,37,38,39,40,41,43,45,47,49,51,53,55,57,59,61,63,65,67,69,71,73]},
-    {id:'stable-observation',death:[7.2,7.4,7.6,7.5,7.3,7.1,7.0,6.8,6.9,7.1,7.3,7.5,7.4,7.2,7.0,6.8,6.7,6.6,6.5,6.4,6.3,6.2,6.1,6.0],transfer:[40,39,38,39,40,41,42,43,42,41,40,39,40,41,42,43,44,45,46,47,48,49,50,51]}
+    {id:'steady-recovery',death:[6.8,6.6,6.5,6.4,6.2,6.1,6.0,5.8,5.6,5.4,5.2,5.0,4.9,4.8,4.6,4.5,4.3,4.2,4.0,3.9,3.8,3.6,3.5,3.4],remainingDays:[4.6,4.6,4.5,4.5,4.4,4.4,4.3,4.3,4.2,4.1,4.1,4.0,3.9,3.9,3.8,3.8,3.7,3.6,3.6,3.5,3.5,3.4,3.3,3.3]},
+    {id:'additional-review',death:[11.0,11.2,11.4,11.7,12.0,12.2,12.5,12.9,13.2,13.6,14.0,14.4,14.8,15.0,14.7,14.2,13.8,13.4,13.0,12.6,12.2,11.9,11.5,11.2],remainingDays:[5.3,5.3,5.4,5.4,5.5,5.5,5.6,5.7,5.7,5.8,5.9,6.0,6.0,6.1,6.0,5.9,5.9,5.8,5.7,5.7,5.6,5.5,5.4,5.4]},
+    {id:'transfer-discussion',death:[4.8,4.7,4.6,4.5,4.3,4.2,4.1,4.0,3.8,3.7,3.6,3.5,3.4,3.3,3.1,3.0,2.9,2.8,2.7,2.6,2.5,2.4,2.3,2.2],remainingDays:[1.8,1.8,1.7,1.7,1.6,1.6,1.5,1.5,1.4,1.4,1.3,1.3,1.2,1.2,1.1,1.1,1.0,1.0,0.9,0.9,0.8,0.8,0.7,0.7]},
+    {id:'extended-monitoring',death:[17.1,17.3,17.5,17.7,18.0,18.2,18.4,18.7,18.9,19.1,19.3,19.5,19.6,19.4,19.2,18.9,18.6,18.3,18.0,17.7,17.4,17.1,16.8,16.5],remainingDays:[7.0,7.1,7.1,7.2,7.3,7.3,7.4,7.5,7.5,7.6,7.7,7.7,7.8,7.7,7.7,7.6,7.5,7.5,7.4,7.3,7.3,7.2,7.1,7.1]},
+    {id:'gradual-progress',death:[9.8,9.6,9.5,9.3,9.1,8.9,8.7,8.5,8.4,8.2,8.0,7.8,7.6,7.5,7.3,7.1,6.9,6.7,6.5,6.3,6.1,5.9,5.7,5.5],remainingDays:[4.4,4.4,4.3,4.3,4.2,4.2,4.1,4.1,4.0,3.9,3.9,3.8,3.8,3.7,3.6,3.6,3.5,3.5,3.4,3.3,3.3,3.2,3.2,3.1]},
+    {id:'stable-observation',death:[7.2,7.4,7.6,7.5,7.3,7.1,7.0,6.8,6.9,7.1,7.3,7.5,7.4,7.2,7.0,6.8,6.7,6.6,6.5,6.4,6.3,6.2,6.1,6.0],remainingDays:[3.7,3.7,3.8,3.8,3.7,3.7,3.6,3.6,3.7,3.7,3.8,3.8,3.7,3.7,3.6,3.6,3.5,3.5,3.4,3.4,3.3,3.3,3.2,3.2]}
   ];
-  const horizons=Object.freeze({mortality:'hospital-stay',transfer:'72h-alive-icu-to-ward'});
-  profiles.forEach(p=>{Object.freeze(p.death);Object.freeze(p.transfer);Object.freeze(p);});Object.freeze(profiles);
+  const horizons=Object.freeze({mortality:'hospital-stay',transfer:'remaining-days-to-alive-icu-to-ward'});
+  profiles.forEach(p=>{Object.freeze(p.death);Object.freeze(p.remainingDays);Object.freeze(p);});Object.freeze(profiles);
   const numeric=value=>typeof value==='number'&&Number.isFinite(value);
   const same=(a,b)=>String(a??'')===String(b??'');
   function unavailable(reason,extra={}){return Object.freeze({available:false,reason,sourceKind:'authored-synthetic-hourly',modelInference:false,notModelInference:true,...extra});}
@@ -54,7 +54,7 @@
     // Hash selects a named authored fixture only; it never estimates a risk.
     const profile=profiles[hash(key)%profiles.length],hourIndex=Math.floor((assessment.minute+(assessment.basis==='source-clock'?(clockMinute(state.clock)-state.t):0))/60);
     const index=((hourIndex%24)+24)%24;
-    return Object.freeze({available:true,reason:null,sourceKind:'authored-synthetic-hourly',modelInference:false,notModelInference:true,patientId:p.pid,episodeKey:key,admissionMinute:p.admit_t,scope:Object.freeze({hospital:String(hospital),ward:String(ward),slotKey:month?.slotKey||null}),assessment,assessmentHour:assessment.hour,assessmentLabel:assessment.stamp,mortalityPercent:profile.death[index],transfer72hPercent:profile.transfer[index],horizons,profileId:profile.id});
+    return Object.freeze({available:true,reason:null,sourceKind:'authored-synthetic-hourly',modelInference:false,notModelInference:true,patientId:p.pid,episodeKey:key,admissionMinute:p.admit_t,scope:Object.freeze({hospital:String(hospital),ward:String(ward),slotKey:month?.slotKey||null}),assessment,assessmentHour:assessment.hour,assessmentLabel:assessment.stamp,mortalityPercent:profile.death[index],wardTransferRemainingDays:profile.remainingDays[index],horizons,profileId:profile.id});
   }
   return Object.freeze({getForBed,identity,profiles,horizons});
 });

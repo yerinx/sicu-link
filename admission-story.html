@@ -19,8 +19,8 @@
   <script>
     (()=>{function choose(lang){document.documentElement.lang=lang;document.querySelectorAll('[data-story-language]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.storyLanguage===lang)));document.getElementById('storyAppFooter').textContent=lang==='ko'?'가상 환자 · 규칙에 따른 에이전트 동작 시연 · 실제 LLM 호출 없음':'Fictional patients · rule-based agent workflow demonstration · no live LLM calls';document.dispatchEvent(new CustomEvent('icu-language'));}document.querySelectorAll('[data-story-language]').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.storyLanguage)));choose(new URLSearchParams(location.search).get('lang')==='en'?'en':'ko');})();
   </script>
-  <script src="ui/bed-ops-sim-model.js"></script>
+  <script src="ui/bed-ops-sim-model.js?scope=20261023-days"></script>
   <script src="ui/admission-story-model.js"></script>
-  <script src="ui/bed-ops-sim.js"></script>
+  <script src="ui/bed-ops-sim.js?scope=20261023-days"></script>
 </body>
 </html>

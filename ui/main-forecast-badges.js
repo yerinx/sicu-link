@@ -1,4 +1,4 @@
-/* Normal-map authored percentages live in the exterior bed-number lane.
+/* Normal-map authored mortality and remaining-day examples live in the exterior bed-number lane.
  * The six care icons and bed artwork are deliberately left untouched.
  */
 (function(root){
@@ -53,15 +53,15 @@
         const death=group.querySelector('.main-forecast-death'),transfer=group.querySelector('.main-forecast-transfer');
         death.setAttribute('transform','translate('+(Number(bed.x)-3.65)+' '+(numberY-.46)+')');
         transfer.setAttribute('transform','translate('+(Number(bed.x)+1.2)+' '+(numberY-.46)+')');
-        death.querySelector('.main-forecast-label').textContent=t('사망','Death');transfer.querySelector('.main-forecast-label').textContent=t('전과','72h');
+        death.querySelector('.main-forecast-label').textContent=t('사망','Death');transfer.querySelector('.main-forecast-label').textContent=t('퇴실','Exit');
         death.querySelector('.main-forecast-value').textContent=value.available?value.mortalityPercent.toFixed(1)+'%':'—';
-        transfer.querySelector('.main-forecast-value').textContent=value.available?value.transfer72hPercent.toFixed(1)+'%':'—';
-        group.querySelector('title').textContent=value.available?t('가상 예측 · 원내 사망 / 72시간 내 생존 일반병동 전과 · ','Authored forecast · hospital death / alive ICU-to-ward transfer within 72h · ')+value.assessment.stamp+t(' 평가 · 실제 모델 추론 아님',' assessment · not model inference'):t('현재 ICU 재실 환자의 예측값 없음','No forecast for a current ICU occupant');
+        transfer.querySelector('.main-forecast-value').textContent=value.available?value.wardTransferRemainingDays.toFixed(1)+t('일','d'):'—';
+        group.querySelector('title').textContent=value.available?t('시연 예시 · 원내 사망 위험(%) / 일반병동 전실까지 남은 일수 · ','Demo examples · in-hospital mortality (%) / days remaining to alive ICU-to-ward transfer · ')+value.assessment.stamp+t(' 평가 · 실제 모델 추론 아님',' assessment · not model inference'):t('현재 ICU 재실 환자의 예측값 없음','No forecast for a current ICU occupant');
       });
       for(const [id,group]of record.badges)if(!seen.has(id)){group.remove();record.badges.delete(id);}
       record.legend.hidden=!hasSynthetic;
       const allocated=state()?.demo_month;
-      record.legend.textContent=t('가상 예측 · 매시간 갱신 · 사망: 원내 사망 · 전과: 72시간 내 생존 일반병동 전과 · 모델 추론 아님','Authored forecasts · hourly updates · Death: in-hospital · Ward: alive ICU-to-ward transfer within 72h · not model inference')+(allocated?t(' · 배치 시연 시각 기준',' · allocation-demo clock'):t(' · 환자 기록 재생 시각 기준',' · patient-replay clock'));
+      record.legend.textContent=t('시연 예시 · 사망: 원내 사망 위험(%) · 퇴실: 일반병동 전실까지 남은 일수 · 실제 모델 추론 아님','Demo examples · Death: in-hospital mortality (%) · Exit: days remaining to alive ward transfer · not model inference')+(allocated?t(' · 배치 시연 시각 기준',' · allocation-demo clock'):t(' · 환자 기록 재생 시각 기준',' · patient-replay clock'));
     });
   }
   function later(){queueMicrotask(render);}

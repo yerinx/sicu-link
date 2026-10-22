@@ -118,8 +118,8 @@
     const prediction=predictions.find(p=>p.patientId===training.patientId)||patient?.prediction||patient?.predictions;
     const value=prediction?.current;
     const current=training.status==='occupied'&&!!training.patientId&&prediction?.patientId===training.patientId&&prediction.status==='active-icu'&&prediction.isCurrent===true&&value?.hour===scene.hour;
-    const metric=key=>current&&typeof value?.[key]==='number'&&Number.isFinite(value[key])&&value[key]>=0&&value[key]<=100?value[key]:null;
-    return {current,mortality:metric('mortalityPercent'),transfer:metric('transfer72hPercent'),assessmentHour:current?value.hour:null,assessmentTime:current?value.time:null};
+    const metric=key=>current&&typeof value?.[key]==='number'&&Number.isFinite(value[key])&&value[key]>=0&&(key!=='mortalityPercent'||value[key]<=100)?value[key]:null;
+    return {current,mortality:metric('mortalityPercent'),transfer:metric('wardTransferRemainingDays'),assessmentHour:current?value.hour:null,assessmentTime:current?value.time:null};
   }
   function renderPredictions(){
     const container=layer.querySelector('.admission-map-forecasts');
@@ -147,10 +147,10 @@
       badge.setAttribute('data-assessment-hour',prediction.assessmentHour===null?'':prediction.assessmentHour);
       badge.setAttribute('data-forecast-state',prediction.current?'current':training.status==='occupied'?'missing':training.status);
       badge.querySelector('.admission-mortality-label').textContent=t('사망','Death');
-      badge.querySelector('.admission-transfer-label').textContent=t('전과','Ward');
+      badge.querySelector('.admission-transfer-label').textContent=t('퇴실','Exit');
       badge.querySelector('.admission-mortality-value').textContent=percent(prediction.mortality);
-      badge.querySelector('.admission-transfer-value').textContent=percent(prediction.transfer);
-      badge.querySelector('title').textContent=t('사망: 원내 사망 위험 · 전과: 72시간 내 생존 전과 · ','Death: in-hospital mortality risk · Ward: alive ICU-to-ward transfer within 72h · ')+(prediction.current?t('가상 예측 · ','Authored forecast · ')+prediction.assessmentTime+t(' 평가 · 실제 모델 추론 아님',' assessment · not model inference'):training.status==='occupied'?t('현재 시각의 예측값 없음','No current-hour forecast'):t('ICU 재실 환자 없음 · 입실 전에는 예측하지 않습니다','No current ICU occupant · no prediction before admission'));
+      badge.querySelector('.admission-transfer-value').textContent=prediction.transfer===null?'—':prediction.transfer.toFixed(1)+t('일','d');
+      badge.querySelector('title').textContent=t('사망: 원내 사망 위험(%) · 퇴실: 일반병동 전실까지 남은 일수 · ','Death: in-hospital mortality (%) · Exit: days remaining to alive ward transfer · ')+(prediction.current?t('가상 예측 · ','Authored forecast · ')+prediction.assessmentTime+t(' 평가 · 실제 모델 추론 아님',' assessment · not model inference'):training.status==='occupied'?t('현재 시각의 예측값 없음','No current-hour forecast'):t('ICU 재실 환자 없음 · 입실 전에는 예측하지 않습니다','No current ICU occupant · no prediction before admission'));
     });
     previous.forEach(el=>el.remove());
   }
@@ -248,7 +248,7 @@
     const title=document.createElement('strong');title.textContent=t('입실 준비 시연','Admission story');
     const message=document.createElement('span');message.textContent=incoming;
     const counts=document.createElement('small');counts.textContent=t('가상 예측 · 매시간 갱신','Authored forecasts · hourly updates')+' · '+t('재실 ','Occupied ')+occupied+'/8'+(preparing?' · '+t('준비 중 ','Preparing ')+preparing:'')+' · '+String(scene.time||'');
-    const legend=document.createElement('small');legend.className='admission-map-legend';legend.textContent=t('사망: 원내 사망 위험 · 전과: 72시간 내 생존 전과 · 간호 아이콘: 미확인','Death: in-hospital mortality risk · Ward: alive ICU-to-ward transfer within 72h · Care symbols: unknown');
+    const legend=document.createElement('small');legend.className='admission-map-legend';legend.textContent=t('사망: 원내 사망 위험(%) · 퇴실: 일반병동 전실까지 남은 일수 · 간호 아이콘: 미확인','Death: in-hospital mortality (%) · Exit: days remaining to alive ward transfer · Care symbols: unknown');
     banner.append(title,message,counts,legend);
   }
   function render(detail){
